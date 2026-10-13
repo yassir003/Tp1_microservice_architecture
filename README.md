@@ -14,53 +14,6 @@ Ce projet illustre les concepts fondamentaux de **l'Inversion de Contrôle (IoC)
 
 ---
 
-## 🏗️ Architecture du Projet
-
-```mermaid
-classDiagram
-    direction LR
-
-    class IDao {
-        <<interface>>
-        +getValue() double
-    }
-
-    class DaoImpl {
-        +getValue() double
-    }
-
-    class DaoImpl2 {
-        +getValue() double
-    }
-
-    class IMetier {
-        <<interface>>
-        +calcul() double
-    }
-
-    class MetierImpl {
-        -dao: IDao
-        +setDao(dao: IDao) void
-        +calcul() double
-    }
-
-    class Presentation2 {
-        +main(args: String[]) void
-        -loadClassNames(fileName: String) String[]
-        -instantiateClass(className: String) Object
-        -injectDependency(target: Object, setterName: String, dependency: Object) void
-    }
-
-    IDao <|.. DaoImpl : implements
-    IDao <|.. DaoImpl2 : implements
-    IMetier <|.. MetierImpl : implements
-    MetierImpl o--> IDao : dépendance injectable
-    Presentation2 ..> IMetier : orchestre & exécute
-    Presentation2 ..> IDao : charge dynamiquement
-```
-
----
-
 ## 📂 Structure des Fichiers
 
 ```text
